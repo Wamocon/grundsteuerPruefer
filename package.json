@@ -1,5 +1,5 @@
 {
-  "name": "template_repo",
+  "name": "grundsteuer-pruefer",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,8 +13,13 @@
     "gen:anforderungsdokument": "node scripts/generate-anforderungsdokument.mjs"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.5.1",
+    "@supabase/ssr": "^0.10.3",
+    "@supabase/supabase-js": "^2.105.4",
     "docx": "^9.6.1",
-    "next": "16.2.1",
+    "next": "^16.2.6",
+    "next-intl": "^4.12.0",
+    "postcss": "^8.5.14",
     "react": "19.2.4",
     "react-dom": "19.2.4"
   },

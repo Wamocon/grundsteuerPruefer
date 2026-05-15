@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "Property Tax Notice Checker",
+    "description": "Check your Grundsteuer (property tax) notice in minutes – free, step by step."
+  },
+  "common": {
+    "appName": "Property Tax Notice Checker",
+    "tagline": "Your property tax notice, checked in minutes.",
+    "startCheck": "Start check",
+    "learnMore": "Learn more",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "next": "Next",
+    "loading": "Loading...",
+    "error": "Error"
+  },
+  "nav": {
+    "home": "Home",
+    "check": "Check",
+    "dashboard": "Dashboard",
+    "help": "Help",
+    "login": "Sign in",
+    "register": "Register",
+    "logout": "Sign out",
+    "profile": "Profile",
+    "admin": "Administration"
+  },
+  "footer": {
+    "imprint": "Imprint",
+    "privacy": "Privacy Policy",
+    "terms": "Terms",
+    "allRights": "All rights reserved."
+  },
+  "home": {
+    "heroTitle": "Can't understand your property tax notice?",
+    "heroSubtitle": "The Property Tax Notice Checker recalculates your notice step by step – free and without specialist knowledge.",
+    "benefit1Title": "All 4 calculation models",
+    "benefit1Text": "Federal model, Bavaria, Baden-Württemberg and Hamburg – the app detects your model automatically.",
+    "benefit2Title": "Transparent calculation",
+    "benefit2Text": "Every calculation step is shown with formula and intermediate result. No black box.",
+    "benefit3Title": "Objection draft in minutes",
+    "benefit3Text": "If a discrepancy is found, the app generates a customisable objection draft – recommended: have it reviewed by a lawyer before submitting.",
+    "deadlineTitle": "Check your objection deadline",
+    "deadlineText": "The objection period is only 1 month after the notice is issued (§ 355 AO). When does your deadline expire?",
+    "freeNotice": "Version 1 is completely free – all features, no account required."
+  },
+  "check": {
+    "stepFederalState": "Select federal state",
+    "stepDescriptionData": "Enter notice data",
+    "stepDeclarationData": "Enter declaration data",
+    "stepResult": "Check result",
+    "modelLabel": "Calculation model",
+    "federalStateLabel": "Federal state",
+    "selectFederalState": "Select federal state..."
+  },
+  "result": {
+    "noDeviation": "No error found",
+    "minorDeviation": "Minor deviation",
+    "significantDeviation": "Significant deviation",
+    "deviationAmount": "Deviation",
+    "disclaimer": "The check result is based on your inputs. If you are uncertain about any input values, we recommend consulting a tax advisor."
+  },
+  "objection": {
+    "generateDraft": "Generate objection draft",
+    "legalDisclaimer": "This letter is a template based on your inputs. It does not constitute legal advice. For complex cases or uncertainties, we recommend consulting a tax advisor or lawyer.",
+    "downloadPdf": "Download as PDF"
+  },
+  "auth": {
+    "emailLabel": "Email address",
+    "passwordLabel": "Password",
+    "loginTitle": "Sign in",
+    "registerTitle": "Create account",
+    "forgotPassword": "Forgot password?",
+    "continueWithoutAccount": "Continue without account",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "No account yet?",
+    "confirmationSent": "Confirmation email sent. Please check your inbox.",
+    "resetPasswordTitle": "Reset password"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "openDeadlines": "Open deadlines",
+    "savedChecks": "Saved checks",
+    "newCheck": "Start new check",
+    "noChecksYet": "No saved checks yet."
+  }
+}

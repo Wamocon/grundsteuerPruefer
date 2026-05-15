@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "title": "Grundsteuerbescheid-Prüfer",
+    "description": "Prüfen Sie Ihren Grundsteuerbescheid in wenigen Minuten – kostenlos, Schritt für Schritt."
+  },
+  "common": {
+    "appName": "Grundsteuerbescheid-Prüfer",
+    "tagline": "Ihr Grundsteuerbescheid, geprüft in wenigen Minuten.",
+    "startCheck": "Prüfung starten",
+    "learnMore": "Mehr erfahren",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "loading": "Lädt...",
+    "error": "Fehler"
+  },
+  "nav": {
+    "home": "Startseite",
+    "check": "Prüfen",
+    "dashboard": "Dashboard",
+    "help": "Hilfe",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "logout": "Abmelden",
+    "profile": "Profil",
+    "admin": "Administration"
+  },
+  "footer": {
+    "imprint": "Impressum",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "allRights": "Alle Rechte vorbehalten."
+  },
+  "home": {
+    "heroTitle": "Grundsteuerbescheid nicht nachvollziehbar?",
+    "heroSubtitle": "Der Grundsteuerbescheid-Prüfer rechnet Ihren Bescheid Schritt für Schritt nach – kostenlos und ohne Fachwissen.",
+    "benefit1Title": "Alle 4 Berechnungsmodelle",
+    "benefit1Text": "Bundesmodell, Bayern, Baden-Württemberg und Hamburg – die App erkennt Ihr Modell automatisch.",
+    "benefit2Title": "Transparente Berechnung",
+    "benefit2Text": "Jeder Rechenschritt wird mit Formel und Zwischenergebnis angezeigt. Keine Blackbox.",
+    "benefit3Title": "Einspruchsentwurf in Minuten",
+    "benefit3Text": "Bei Abweichung generiert die App einen personalisierbaren Einspruchsentwurf – empfohlen: vor der Einreichung anwaltlich prüfen lassen.",
+    "deadlineTitle": "Einspruchsfrist prüfen",
+    "deadlineText": "Die Einspruchsfrist beträgt nur 1 Monat nach Bescheidbekanntgabe (§ 355 AO). Wann läuft Ihre Frist ab?",
+    "freeNotice": "Version 1 ist vollständig kostenlos – alle Funktionen, kein Konto erforderlich."
+  },
+  "check": {
+    "stepFederalState": "Bundesland wählen",
+    "stepDescriptionData": "Bescheiddaten eingeben",
+    "stepDeclarationData": "Erklärungsangaben eingeben",
+    "stepResult": "Prüfergebnis",
+    "modelLabel": "Berechnungsmodell",
+    "federalStateLabel": "Bundesland",
+    "selectFederalState": "Bundesland auswählen..."
+  },
+  "result": {
+    "noDeviation": "Kein Fehler gefunden",
+    "minorDeviation": "Geringe Abweichung",
+    "significantDeviation": "Erhebliche Abweichung",
+    "deviationAmount": "Abweichung",
+    "disclaimer": "Das Prüfergebnis basiert auf Ihren Eingaben. Bei Unsicherheit über Eingabewerte empfehlen wir die Beratung durch einen Steuerberater."
+  },
+  "objection": {
+    "generateDraft": "Einspruchsentwurf erstellen",
+    "legalDisclaimer": "Dieses Schreiben ist ein Musterbrief auf Basis Ihrer Angaben. Es stellt keine Rechtsberatung dar. Bei komplexen Sachverhalten oder Unsicherheiten empfehlen wir die Beratung durch einen Steuerberater oder Rechtsanwalt.",
+    "downloadPdf": "Als PDF herunterladen"
+  },
+  "auth": {
+    "emailLabel": "E-Mail-Adresse",
+    "passwordLabel": "Passwort",
+    "loginTitle": "Anmelden",
+    "registerTitle": "Konto erstellen",
+    "forgotPassword": "Passwort vergessen?",
+    "continueWithoutAccount": "Weiter ohne Konto",
+    "alreadyHaveAccount": "Bereits ein Konto?",
+    "noAccount": "Noch kein Konto?",
+    "confirmationSent": "Bestätigungs-E-Mail wurde gesendet. Bitte prüfen Sie Ihr Postfach.",
+    "resetPasswordTitle": "Passwort zurücksetzen"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "openDeadlines": "Offene Fristen",
+    "savedChecks": "Gespeicherte Prüffälle",
+    "newCheck": "Neuen Prüffall starten",
+    "noChecksYet": "Noch keine gespeicherten Prüffälle."
+  }
+}
