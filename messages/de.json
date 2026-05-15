@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "Grundsteuerbescheid-Prüfer",
+    "title": "Grundwächter",
     "description": "Prüfen Sie Ihren Grundsteuerbescheid in wenigen Minuten – kostenlos, Schritt für Schritt."
   },
   "common": {
-    "appName": "Grundsteuerbescheid-Prüfer",
+    "appName": "Grundwächter",
     "tagline": "Ihr Grundsteuerbescheid, geprüft in wenigen Minuten.",
     "startCheck": "Prüfung starten",
     "learnMore": "Mehr erfahren",
@@ -34,7 +34,7 @@
   },
   "home": {
     "heroTitle": "Grundsteuerbescheid nicht nachvollziehbar?",
-    "heroSubtitle": "Der Grundsteuerbescheid-Prüfer rechnet Ihren Bescheid Schritt für Schritt nach – kostenlos und ohne Fachwissen.",
+    "heroSubtitle": "Grundwächter rechnet Ihren Bescheid Schritt für Schritt nach – kostenlos und ohne Fachwissen.",
     "benefit1Title": "Alle 4 Berechnungsmodelle",
     "benefit1Text": "Bundesmodell, Bayern, Baden-Württemberg und Hamburg – die App erkennt Ihr Modell automatisch.",
     "benefit2Title": "Transparente Berechnung",

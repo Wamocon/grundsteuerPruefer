@@ -25,8 +25,8 @@ export default async function DatenschutzPage({ params }: Props) {
 
           <h2>2. Überblick</h2>
           <p>
-            Diese Datenschutzerklärung gilt für den Grundsteuerbescheid-Prüfer
-            (grundsteuer-pruefer.de). Wir verarbeiten personenbezogene Daten nur, soweit
+            Diese Datenschutzerklärung gilt für Grundwächter
+            (grundwaechter.de). Wir verarbeiten personenbezogene Daten nur, soweit
             dies zur Bereitstellung der App erforderlich ist.
           </p>
 

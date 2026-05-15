@@ -154,7 +154,7 @@ export function EinspruchPdfDocument({ data }: EinspruchPdfDocumentProps) {
         {/* Legal disclaimer */}
         <View style={styles.disclaimer}>
           <Text>
-            HINWEIS: Dieses Schreiben wurde mit dem Grundsteuerbescheid-Prüfer (WAMOCON GmbH)
+            HINWEIS: Dieses Schreiben wurde mit Grundwächter (WAMOCON GmbH)
             erstellt und basiert auf den Angaben des Nutzers. Es stellt keine Rechtsberatung dar
             und ersetzt nicht die Prüfung durch einen Rechtsanwalt oder Steuerberater.
             Vor der Einreichung wird die anwaltliche Überprüfung ausdrücklich empfohlen.

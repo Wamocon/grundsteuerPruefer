@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Grundsteuerbescheid-Prüfer",
+  title: "Grundwächter",
   description: "Prüfen Sie Ihren Grundsteuerbescheid in wenigen Minuten – kostenlos.",
 };
 

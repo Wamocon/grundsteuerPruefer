@@ -18,14 +18,14 @@ export default async function AgbPage({ params }: Props) {
 
           <h2>§ 1 Geltungsbereich und Anbieter</h2>
           <p>
-            Diese AGB gelten für die Nutzung des Grundsteuerbescheid-Prüfers, einem
+            Diese AGB gelten für die Nutzung von Grundwächter, einem
             informatorischen Self-Service-Tool der WAMOCON GmbH, Mergenthalerallee 79 - 81,
             65760 Eschborn (nachfolgend &ldquo;Anbieter&rdquo;). Version 1 ist vollständig kostenlos.
           </p>
 
           <h2>§ 2 Leistungsbeschreibung</h2>
           <p>
-            Der Grundsteuerbescheid-Prüfer ist ein informatorisches Werkzeug zur
+            Grundwächter ist ein informatorisches Werkzeug zur
             Plausibilitätsprüfung von Grundsteuerbescheiden. Er berechnet den Grundsteuerbetrag
             anhand öffentlich zugänglicher gesetzlicher Formeln und vergleicht ihn mit dem
             Bescheidbetrag.
@@ -33,7 +33,7 @@ export default async function AgbPage({ params }: Props) {
 
           <h2>§ 3 Keine Rechtsberatung (RDG)</h2>
           <p>
-            Der Grundsteuerbescheid-Prüfer erbringt keine Rechtsdienstleistungen im Sinne
+            Grundwächter erbringt keine Rechtsdienstleistungen im Sinne
             des § 2 Abs. 1 RDG. Die App zeigt rechnerische Abweichungen auf und generiert
             Musterschreiben. Diese stellen nach herrschender Rechtsprechung (BGH, I ZR 118/09)
             keine Rechtsdienstleistung dar. Vor der Einreichung eines Einspruchs beim Finanzamt

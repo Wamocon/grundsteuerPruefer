@@ -20,7 +20,7 @@ export function Header({ locale }: HeaderProps) {
         >
           <AppLogo className="h-7 w-7" />
           <span className="hidden sm:inline text-sm">
-            Grundsteuerbescheid-Prüfer
+            Grundwächter
           </span>
         </Link>
 

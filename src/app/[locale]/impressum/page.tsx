@@ -41,7 +41,7 @@ export default async function ImpressumPage({ params }: Props) {
 
           <h2>Rechtlicher Hinweis</h2>
           <p>
-            Der Grundsteuerbescheid-Prüfer ist ein informatorisches Self-Service-Tool.
+            Grundwächter ist ein informatorisches Self-Service-Tool.
             Die generierten Berechnungen und Einspruchsentwürfe stellen keine Rechtsberatung
             im Sinne des Rechtsdienstleistungsgesetzes (RDG) dar. Vor der Einreichung eines
             Einspruchs beim Finanzamt wird die Prüfung durch einen Rechtsanwalt oder

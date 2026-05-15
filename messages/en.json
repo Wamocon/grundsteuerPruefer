@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title": "Property Tax Notice Checker",
+    "title": "Grundwächter",
     "description": "Check your Grundsteuer (property tax) notice in minutes – free, step by step."
   },
   "common": {
-    "appName": "Property Tax Notice Checker",
+    "appName": "Grundwächter",
     "tagline": "Your property tax notice, checked in minutes.",
     "startCheck": "Start check",
     "learnMore": "Learn more",

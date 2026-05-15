@@ -78,7 +78,7 @@ export default async function HomePage({ params }: Props) {
       {/* Legal disclaimer */}
       <section className="px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4 text-xs text-[var(--muted)]">
-          <strong>Rechtlicher Hinweis:</strong> Der Grundsteuerbescheid-Prüfer ist ein
+          <strong>Rechtlicher Hinweis:</strong> Grundwächter ist ein
           informatorisches Prüftool und stellt keine Rechtsberatung dar. Generierte
           Einspruchsentwürfe ersetzen nicht die Beratung durch einen Rechtsanwalt oder
           Steuerberater. Die App arbeitet auf Basis Ihrer Eingaben – überprüfen Sie alle
