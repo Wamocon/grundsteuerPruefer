@@ -14,7 +14,7 @@
     "test:watch": "vitest",
     "seed": "npx tsx scripts/seed-test-data.ts",
     "gen:anforderungsdokument": "node scripts/generate-anforderungsdokument.mjs",
-    "deploy": "vercel build --prod && vercel deploy --prebuilt --prod --archive=tgz"
+    "deploy": "vercel deploy --prod --archive=tgz",
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.5.1",
