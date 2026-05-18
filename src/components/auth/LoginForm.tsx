@@ -8,9 +8,10 @@ import { useRouter } from "next/navigation";
 
 interface LoginFormProps {
   locale: string;
+  next?: string;
 }
 
-export function LoginForm({ locale }: LoginFormProps) {
+export function LoginForm({ locale, next }: LoginFormProps) {
   const t = useTranslations("auth");
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -35,7 +36,7 @@ export function LoginForm({ locale }: LoginFormProps) {
       return;
     }
 
-    router.push(`/${locale}/dashboard`);
+    router.push(next ?? `/${locale}/dashboard`);
     router.refresh();
   }
 

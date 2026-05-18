@@ -2,12 +2,23 @@
 
 import type { BerechnungsErgebnis, AbweichungsErgebnis } from "@/lib/berechnung";
 import { verbleibendeTage } from "@/lib/berechnung/fristen";
-import Link from "next/link";
+import { generiereAbweichungsErklaerung } from "@/lib/berechnung/erklaerung";
+import { useRouter } from "next/navigation";
+import type { PruefassistentState } from "./types";
+
+export const EINSPRUCH_CONTEXT_KEY = "grundwaechter_einspruch_ctx";
+
+export interface EinspruchContext {
+  state: PruefassistentState;
+  ergebnis: BerechnungsErgebnis;
+  abweichung: AbweichungsErgebnis;
+}
 
 interface StepErgebnisProps {
   ergebnis: BerechnungsErgebnis;
   abweichung: AbweichungsErgebnis;
   einspruchsFrist: Date | null;
+  wizardState: PruefassistentState;
   onBack: () => void;
   onNeuerPrueffall: () => void;
 }
@@ -40,12 +51,27 @@ export function StepErgebnis({
   ergebnis,
   abweichung,
   einspruchsFrist,
+  wizardState,
   onBack,
   onNeuerPrueffall,
 }: StepErgebnisProps) {
+  const router = useRouter();
   const config = STUFE_CONFIG[abweichung.stufe];
   const tageVerbleibend = einspruchsFrist ? verbleibendeTage(einspruchsFrist) : null;
   const hatAbweichung = abweichung.stufe !== "keine";
+
+  function handleEinspruchClick() {
+    const ctx: EinspruchContext = { state: wizardState, ergebnis, abweichung };
+    sessionStorage.setItem(EINSPRUCH_CONTEXT_KEY, JSON.stringify(ctx));
+    const params = new URLSearchParams({
+      bescheidBetrag: String(abweichung.bescheidBetrag),
+      berechneterBetrag: String(abweichung.berechneterBetrag),
+      abweichung: String(abweichung.abweichungEuro),
+      frist: einspruchsFrist?.toISOString() ?? "",
+    });
+    const locale = wizardState.bundesland ? "de" : "de";
+    router.push(`/${locale}/einspruch?${params.toString()}`);
+  }
 
   return (
     <div className="space-y-6">
@@ -98,6 +124,12 @@ export function StepErgebnis({
         </div>
       )}
 
+      {/* P-07: Plain-language explanation */}
+      <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-4 py-4 text-sm text-[var(--foreground)] leading-relaxed">
+        <p className="text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide">Erklärung in verständlicher Sprache</p>
+        <p>{generiereAbweichungsErklaerung(wizardState, abweichung)}</p>
+      </div>
+
       {/* Calculation steps */}
       <details className="rounded-lg border border-[var(--card-border)]">
         <summary className="cursor-pointer px-4 py-3 text-sm font-semibold text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors">
@@ -133,12 +165,12 @@ export function StepErgebnis({
 
       {/* Actions */}
       {hatAbweichung && (
-        <Link
-          href={`/de/einspruch?bescheidBetrag=${abweichung.bescheidBetrag}&berechneterBetrag=${abweichung.berechneterBetrag}&abweichung=${abweichung.abweichungEuro}&frist=${einspruchsFrist?.toISOString() ?? ""}`}
+        <button
+          onClick={handleEinspruchClick}
           className="block w-full rounded-lg bg-[var(--primary)] py-2.5 text-center text-sm font-semibold text-white hover:bg-[var(--primary-hover)] transition-colors"
         >
           Einspruchsentwurf erstellen
-        </Link>
+        </button>
       )}
 
       <div className="flex gap-3">

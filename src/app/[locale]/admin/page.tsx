@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { redirect } from "next/navigation";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
+import { AdminUserTable } from "@/components/admin/AdminUserTable";
 import type { Database } from "@/types/database";
 
 type ProfileRow = Database["public"]["Tables"]["profiles"]["Row"];
@@ -31,7 +32,7 @@ export default async function AdminPage({ params }: Props) {
     .select("id, email, full_name, is_admin, created_at")
     .order("created_at", { ascending: false })
     .limit(50);
-  const users = usersRaw as Pick<ProfileRow, "id" | "email" | "full_name" | "is_admin" | "created_at">[] | null;
+  const users = (usersRaw ?? []) as Pick<ProfileRow, "id" | "email" | "full_name" | "is_admin" | "created_at">[];
 
   return (
     <div className="px-4 py-6 sm:px-6 lg:px-8">
@@ -42,38 +43,10 @@ export default async function AdminPage({ params }: Props) {
             { label: "Administration" },
           ]}
         />
-        <h1 className="mt-6 text-2xl font-bold text-[var(--foreground)] mb-6">Administration</h1>
+        <h1 className="mt-6 text-2xl font-bold text-[var(--foreground)] mb-2">Administration</h1>
+        <p className="text-sm text-[var(--muted)] mb-6">{users.length} Nutzer registriert</p>
 
-        <div className="rounded-xl border border-[var(--card-border)] overflow-hidden">
-          <table className="w-full text-sm">
-            <thead className="bg-[var(--muted-bg)]">
-              <tr>
-                <th className="px-4 py-2 text-left text-xs font-semibold text-[var(--muted)]">E-Mail</th>
-                <th className="px-4 py-2 text-left text-xs font-semibold text-[var(--muted)]">Name</th>
-                <th className="px-4 py-2 text-left text-xs font-semibold text-[var(--muted)]">Admin</th>
-                <th className="px-4 py-2 text-left text-xs font-semibold text-[var(--muted)]">Erstellt</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--card-border)]">
-              {users?.map((u) => (
-                <tr key={u.id} className="hover:bg-[var(--muted-bg)]">
-                  <td className="px-4 py-2">{u.email}</td>
-                  <td className="px-4 py-2 text-[var(--muted)]">{u.full_name ?? "-"}</td>
-                  <td className="px-4 py-2">
-                    {u.is_admin ? (
-                      <span className="text-xs font-medium text-[var(--primary)]">Admin</span>
-                    ) : (
-                      <span className="text-xs text-[var(--muted)]">Nutzer</span>
-                    )}
-                  </td>
-                  <td className="px-4 py-2 text-[var(--muted)]">
-                    {new Date(u.created_at).toLocaleDateString("de-DE")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <AdminUserTable users={users} currentUserId={user.id} />
       </div>
     </div>
   );

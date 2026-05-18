@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { pdf } from "@react-pdf/renderer";
 import { EinspruchPdfDocument } from "./EinspruchPdfDocument";
+import { EINSPRUCH_CONTEXT_KEY, type EinspruchContext } from "@/components/pruefassistent/StepErgebnis";
 
 export interface EinspruchFormData {
   antragstellerName: string;
@@ -30,6 +31,7 @@ export function EinspruchGenerator({
   abweichungEuro = 0,
   einspruchFrist = "",
 }: EinspruchGeneratorProps) {
+  const [context, setContext] = useState<EinspruchContext | null>(null);
   const [formData, setFormData] = useState<EinspruchFormData>({
     antragstellerName: "",
     antragstellerAdresse: "",
@@ -45,6 +47,18 @@ export function EinspruchGenerator({
   });
   const [generating, setGenerating] = useState(false);
 
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(EINSPRUCH_CONTEXT_KEY);
+      if (raw) {
+        const ctx = JSON.parse(raw) as EinspruchContext;
+        setContext(ctx);
+      }
+    } catch {
+      // sessionStorage unavailable or invalid JSON - continue without context
+    }
+  }, []);
+
   function update(key: keyof EinspruchFormData, value: string) {
     setFormData((prev) => ({ ...prev, [key]: value }));
   }
@@ -52,7 +66,9 @@ export function EinspruchGenerator({
   async function downloadPdf() {
     setGenerating(true);
     try {
-      const blob = await pdf(<EinspruchPdfDocument data={formData} />).toBlob();
+      const blob = await pdf(
+        <EinspruchPdfDocument data={formData} context={context ?? undefined} />
+      ).toBlob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;

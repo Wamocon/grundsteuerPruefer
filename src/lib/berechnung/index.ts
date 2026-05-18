@@ -6,3 +6,4 @@ export * from "./hamburgmodell";
 export * from "./abweichung";
 export * from "./modellauswahl";
 export * from "./fristen";
+export * from "./erklaerung";
