@@ -1,5 +1,7 @@
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 import { EinspruchGenerator } from "@/components/einspruch/EinspruchGenerator";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -14,6 +16,13 @@ type Props = {
 export default async function EinspruchPage({ params, searchParams }: Props) {
   const { locale } = await params;
   const sp = await searchParams;
+
+  // B-03: Einspruch-Generator erfordert ein Konto
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    redirect(`/${locale}/auth/login?next=/${locale}/einspruch`);
+  }
 
   return (
     <div className="px-4 py-6 sm:px-6 lg:px-8">
