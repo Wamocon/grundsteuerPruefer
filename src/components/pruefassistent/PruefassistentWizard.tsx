@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { INITIAL_STATE, pruefeEingaben } from "./types";
 import type { PruefassistentState } from "./types";
 import { StepBundesland } from "./StepBundesland";
@@ -17,8 +17,11 @@ import {
 } from "@/lib/berechnung";
 import type { BerechnungsErgebnis, AbweichungsErgebnis } from "@/lib/berechnung";
 import type { Bundesland } from "@/types/database";
+import { savePrueffall } from "@/app/actions/prueffall";
 
 const STEPS = ["Bundesland", "Eingabe", "Ergebnis"];
+
+const WIZARD_STORAGE_KEY = "grundwaechter_wizard_state";
 
 export function PruefassistentWizard() {
   const [state, setState] = useState<PruefassistentState>(INITIAL_STATE);
@@ -26,6 +29,31 @@ export function PruefassistentWizard() {
   const [abweichung, setAbweichung] = useState<AbweichungsErgebnis | null>(null);
   const [einspruchsFrist, setEinspruchsFrist] = useState<Date | null>(null);
   const [fehler, setFehler] = useState<Array<{ feld: string; nachricht: string }>>([]);
+
+  // K-05: Restore wizard state from localStorage on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(WIZARD_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved) as PruefassistentState;
+        // Only restore steps 0 and 1 (not the final result step)
+        setState({ ...parsed, step: Math.min(parsed.step, 1) });
+      }
+    } catch {
+      // ignore parse errors
+    }
+  }, []);
+
+  // K-05: Persist wizard state to localStorage on every change (steps 0 and 1 only)
+  useEffect(() => {
+    if (state.step <= 1) {
+      try {
+        localStorage.setItem(WIZARD_STORAGE_KEY, JSON.stringify(state));
+      } catch {
+        // ignore storage errors (private browsing, quota exceeded)
+      }
+    }
+  }, [state]);
 
   function update(partial: Partial<PruefassistentState>) {
     setState((prev) => ({ ...prev, ...partial }));
@@ -97,6 +125,13 @@ export function PruefassistentWizard() {
     setAbweichung(abweichungsErgebnis);
     setEinspruchsFrist(frist);
     setState((prev) => ({ ...prev, step: 2 }));
+
+    // Persist to Supabase if user is logged in (silent - no error shown to user)
+    savePrueffall(
+      { ...state, step: 2 },
+      abweichungsErgebnis,
+      frist ? frist.toISOString().split("T")[0] : null
+    ).catch(() => { /* silent - persisting is best-effort */ });
   }
 
   return (
@@ -145,8 +180,12 @@ export function PruefassistentWizard() {
           ergebnis={ergebnis}
           abweichung={abweichung}
           einspruchsFrist={einspruchsFrist}
+          wizardState={state}
           onBack={vorherigerSchritt}
-          onNeuerPrueffall={() => setState(INITIAL_STATE)}
+          onNeuerPrueffall={() => {
+            try { localStorage.removeItem(WIZARD_STORAGE_KEY); } catch { /* ignore */ }
+            setState(INITIAL_STATE);
+          }}
         />
       )}
     </div>
