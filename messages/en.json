@@ -24,7 +24,10 @@
     "register": "Register",
     "logout": "Sign out",
     "profile": "Profile",
-    "admin": "Administration"
+    "admin": "Administration",
+    "skipToContent": "Skip to main content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "footer": {
     "imprint": "Imprint",
@@ -43,7 +46,10 @@
     "benefit3Text": "If a discrepancy is found, the app generates a customisable objection draft – recommended: have it reviewed by a lawyer before submitting.",
     "deadlineTitle": "Check your objection deadline",
     "deadlineText": "The objection period is only 1 month after the notice is issued (§ 355 AO). When does your deadline expire?",
-    "freeNotice": "Version 1 is completely free – all features, no account required."
+    "freeNotice": "Version 1 is completely free – all features, no account required.",
+    "freeBadge": "Free in Version 1",
+    "legalNoticeTitle": "Legal Notice:",
+    "legalNoticeText": "Grundwächter is an informational checking tool and does not constitute legal advice. Generated objection drafts do not replace advice from a lawyer or tax advisor. The app works based on your inputs – verify all information against your original notice."
   },
   "check": {
     "stepFederalState": "Select federal state",
@@ -76,13 +82,21 @@
     "alreadyHaveAccount": "Already have an account?",
     "noAccount": "No account yet?",
     "confirmationSent": "Confirmation email sent. Please check your inbox.",
-    "resetPasswordTitle": "Reset password"
+    "resetPasswordTitle": "Reset password",
+    "errorInvalidCredentials": "Email or password is incorrect.",
+    "errorEmailNotConfirmed": "Please confirm your email address first.",
+    "errorTooManyRequests": "Too many login attempts. Please wait a moment.",
+    "errorGeneric": "An error occurred. Please try again.",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "passwordMinLength": "At least 8 characters"
   },
   "dashboard": {
     "title": "Dashboard",
     "openDeadlines": "Open deadlines",
     "savedChecks": "Saved checks",
     "newCheck": "Start new check",
-    "noChecksYet": "No saved checks yet."
+    "noChecksYet": "No saved checks yet.",
+    "repeatCheck": "Check again"
   }
 }

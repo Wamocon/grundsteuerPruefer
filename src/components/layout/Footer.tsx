@@ -1,8 +1,11 @@
-import { useTranslations } from "next-intl";
+"use client";
+
+import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const locale = useLocale();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -20,13 +23,13 @@ export function Footer() {
 
           {/* Legal links */}
           <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-[var(--muted)]">
-            <Link href="/de/impressum" className="hover:text-[var(--foreground)] transition-colors">
+            <Link href={`/${locale}/impressum`} className="hover:text-[var(--foreground)] transition-colors">
               {t("imprint")}
             </Link>
-            <Link href="/de/datenschutz" className="hover:text-[var(--foreground)] transition-colors">
+            <Link href={`/${locale}/datenschutz`} className="hover:text-[var(--foreground)] transition-colors">
               {t("privacy")}
             </Link>
-            <Link href="/de/agb" className="hover:text-[var(--foreground)] transition-colors">
+            <Link href={`/${locale}/agb`} className="hover:text-[var(--foreground)] transition-colors">
               {t("terms")}
             </Link>
           </nav>
