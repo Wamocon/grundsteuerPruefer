@@ -30,13 +30,11 @@ export function PruefassistentWizard() {
   const [einspruchsFrist, setEinspruchsFrist] = useState<Date | null>(null);
   const [fehler, setFehler] = useState<Array<{ feld: string; nachricht: string }>>([]);
 
-  // K-05: Restore wizard state from localStorage on mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem(WIZARD_STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved) as PruefassistentState;
-        // Only restore steps 0 and 1 (not the final result step)
         setState({ ...parsed, step: Math.min(parsed.step, 1) });
       }
     } catch {
@@ -44,13 +42,12 @@ export function PruefassistentWizard() {
     }
   }, []);
 
-  // K-05: Persist wizard state to localStorage on every change (steps 0 and 1 only)
   useEffect(() => {
     if (state.step <= 1) {
       try {
         localStorage.setItem(WIZARD_STORAGE_KEY, JSON.stringify(state));
       } catch {
-        // ignore storage errors (private browsing, quota exceeded)
+        // ignore storage errors
       }
     }
   }, [state]);
@@ -126,13 +123,15 @@ export function PruefassistentWizard() {
     setEinspruchsFrist(frist);
     setState((prev) => ({ ...prev, step: 2 }));
 
-    // Persist to Supabase if user is logged in (silent - no error shown to user)
     savePrueffall(
       { ...state, step: 2 },
       abweichungsErgebnis,
       frist ? frist.toISOString().split("T")[0] : null
-    ).catch(() => { /* silent - persisting is best-effort */ });
+    ).catch(() => { /* silent */ });
   }
+
+  // F-09: Progress starts at 0% on step 0 and reaches 100% on the final step
+  const progressPercent = (state.step / (STEPS.length - 1)) * 100;
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-8">
@@ -157,7 +156,7 @@ export function PruefassistentWizard() {
         <div className="h-1.5 w-full rounded-full bg-[var(--muted-bg)]">
           <div
             className="h-1.5 rounded-full bg-[var(--primary)] transition-all duration-300"
-            style={{ width: `${((state.step + 1) / STEPS.length) * 100}%` }}
+            style={{ width: `${progressPercent}%` }}
           />
         </div>
       </div>

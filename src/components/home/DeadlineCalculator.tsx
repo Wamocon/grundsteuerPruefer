@@ -8,9 +8,15 @@ export function DeadlineCalculator() {
   const [fristDatum, setFristDatum] = useState<Date | null>(null);
   const [tageVerbleibend, setTageVerbleibend] = useState<number | null>(null);
 
-  function berechnen() {
-    if (!bescheidDatum) return;
-    const datum = new Date(bescheidDatum);
+  // F-11: Auto-calculate on change - no button click required
+  function handleDateChange(value: string) {
+    setBescheidDatum(value);
+    if (!value) {
+      setFristDatum(null);
+      setTageVerbleibend(null);
+      return;
+    }
+    const datum = new Date(value);
     const frist = berechneEinspruchsFrist(datum);
     setFristDatum(frist);
     setTageVerbleibend(verbleibendeTage(frist));
@@ -21,29 +27,20 @@ export function DeadlineCalculator() {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="flex flex-col sm:flex-row gap-3 w-full max-w-md">
-        <div className="flex-1">
-          <label
-            htmlFor="bescheidDatum"
-            className="block text-xs font-medium text-[var(--muted)] mb-1 text-left"
-          >
-            Datum des Grundsteuerbescheids
-          </label>
-          <input
-            id="bescheidDatum"
-            type="date"
-            value={bescheidDatum}
-            onChange={(e) => setBescheidDatum(e.target.value)}
-            className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-[var(--foreground)] focus:border-[var(--primary)] focus:outline-none"
-          />
-        </div>
-        <button
-          onClick={berechnen}
-          disabled={!bescheidDatum}
-          className="self-end rounded-lg bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--primary-hover)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+      <div className="w-full max-w-md">
+        <label
+          htmlFor="bescheidDatum"
+          className="block text-xs font-medium text-[var(--muted)] mb-1 text-left"
         >
-          Berechnen
-        </button>
+          Datum des Grundsteuerbescheids
+        </label>
+        <input
+          id="bescheidDatum"
+          type="date"
+          value={bescheidDatum}
+          onChange={(e) => handleDateChange(e.target.value)}
+          className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm text-[var(--foreground)] focus:border-[var(--primary)] focus:outline-none"
+        />
       </div>
 
       {fristDatum && tageVerbleibend !== null && (
