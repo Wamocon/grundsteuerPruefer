@@ -1,17 +1,20 @@
+import type { User } from "@supabase/supabase-js";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { AppLogo } from "@/components/ui/AppLogo";
 import { HeaderActions } from "@/components/layout/HeaderActions";
+import { MobileNav } from "@/components/layout/MobileNav";
 
 interface HeaderProps {
   locale: string;
+  user: User | null;
 }
 
-export function Header({ locale }: HeaderProps) {
+export function Header({ locale, user }: HeaderProps) {
   const t = useTranslations("nav");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/95 backdrop-blur">
+    <header className="relative sticky top-0 z-50 border-b border-[var(--card-border)] bg-[var(--background)]/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo + App Name */}
         <Link
@@ -34,8 +37,11 @@ export function Header({ locale }: HeaderProps) {
           </Link>
         </nav>
 
-        {/* Actions: Theme toggle, Language switcher, Auth */}
-        <HeaderActions locale={locale} />
+        {/* Actions: Theme toggle, Language switcher, Auth, Mobile nav */}
+        <div className="flex items-center gap-1">
+          <HeaderActions locale={locale} user={user} />
+          <MobileNav locale={locale} />
+        </div>
       </div>
     </header>
   );
