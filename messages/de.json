@@ -25,6 +25,8 @@
     "logout": "Abmelden",
     "profile": "Profil",
     "admin": "Administration",
+    "myChecks": "Meine Prüfungen",
+    "handbook": "Handbuch",
     "skipToContent": "Zum Hauptinhalt springen",
     "openMenu": "Menü öffnen",
     "closeMenu": "Menü schließen"
@@ -97,6 +99,13 @@
     "savedChecks": "Gespeicherte Prüffälle",
     "newCheck": "Neuen Prüffall starten",
     "noChecksYet": "Noch keine gespeicherten Prüffälle.",
-    "repeatCheck": "Erneut prüfen"
-  }
+    "repeatCheck": "Erneut prüfen"  },
+  "handbuch": {
+    "title": "Produkthandbuch",
+    "toc": "Inhaltsverzeichnis",
+    "searchPlaceholder": "Im Handbuch suchen ...",
+    "downloadPdf": "Als PDF herunterladen",
+    "generating": "PDF wird erstellt ...",
+    "noResults": "Keine Ergebnisse gefunden.",
+    "tocToggle": "Inhaltsverzeichnis"  }
 }

@@ -25,6 +25,8 @@
     "logout": "Sign out",
     "profile": "Profile",
     "admin": "Administration",
+    "myChecks": "My Checks",
+    "handbook": "Handbook",
     "skipToContent": "Skip to main content",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
@@ -98,5 +100,14 @@
     "newCheck": "Start new check",
     "noChecksYet": "No saved checks yet.",
     "repeatCheck": "Check again"
+  },
+  "handbuch": {
+    "title": "Product Handbook",
+    "toc": "Table of Contents",
+    "searchPlaceholder": "Search the handbook ...",
+    "downloadPdf": "Download as PDF",
+    "generating": "Generating PDF ...",
+    "noResults": "No results found.",
+    "tocToggle": "Table of Contents"
   }
 }

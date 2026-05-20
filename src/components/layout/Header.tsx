@@ -32,6 +32,14 @@ export function Header({ locale, user }: HeaderProps) {
           <Link href={`/${locale}/pruefen`} className="hover:text-[var(--foreground)] transition-colors">
             {t("check")}
           </Link>
+          {user && (
+            <Link href={`/${locale}/dashboard`} className="hover:text-[var(--foreground)] transition-colors">
+              {t("myChecks")}
+            </Link>
+          )}
+          <Link href={`/${locale}/handbuch`} className="hover:text-[var(--foreground)] transition-colors">
+            {t("handbook")}
+          </Link>
           <Link href={`/${locale}/hilfe`} className="hover:text-[var(--foreground)] transition-colors">
             {t("help")}
           </Link>
@@ -40,7 +48,7 @@ export function Header({ locale, user }: HeaderProps) {
         {/* Actions: Theme toggle, Language switcher, Auth, Mobile nav */}
         <div className="flex items-center gap-1">
           <HeaderActions locale={locale} user={user} />
-          <MobileNav locale={locale} />
+          <MobileNav locale={locale} user={user} />
         </div>
       </div>
     </header>

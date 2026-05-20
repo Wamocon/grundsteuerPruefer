@@ -3,14 +3,27 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 interface MobileNavProps {
   locale: string;
+  user: User | null;
 }
 
-export function MobileNav({ locale }: MobileNavProps) {
+export function MobileNav({ locale, user }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const t = useTranslations("nav");
+  const router = useRouter();
+
+  async function handleLogout() {
+    setOpen(false);
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push(`/${locale}`);
+    router.refresh();
+  }
 
   return (
     <div className="md:hidden">
@@ -33,6 +46,22 @@ export function MobileNav({ locale }: MobileNavProps) {
             >
               {t("check")}
             </Link>
+            {user && (
+              <Link
+                href={`/${locale}/dashboard`}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-2.5 text-sm font-medium text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors"
+              >
+                {t("myChecks")}
+              </Link>
+            )}
+            <Link
+              href={`/${locale}/handbuch`}
+              onClick={() => setOpen(false)}
+              className="rounded-md px-3 py-2.5 text-sm font-medium text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors"
+            >
+              {t("handbook")}
+            </Link>
             <Link
               href={`/${locale}/hilfe`}
               onClick={() => setOpen(false)}
@@ -40,21 +69,28 @@ export function MobileNav({ locale }: MobileNavProps) {
             >
               {t("help")}
             </Link>
-            <Link
-              href={`/${locale}/dashboard`}
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-2.5 text-sm font-medium text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors"
-            >
-              {t("dashboard")}
-            </Link>
             <div className="border-t border-[var(--card-border)] my-1" />
-            <Link
-              href={`/${locale}/auth/login`}
-              onClick={() => setOpen(false)}
-              className="rounded-md px-3 py-2.5 text-sm font-medium text-[var(--primary)] hover:bg-[var(--muted-bg)] transition-colors"
-            >
-              {t("login")}
-            </Link>
+            {user ? (
+              <>
+                <span className="px-3 py-1.5 text-xs text-[var(--muted)] truncate">
+                  {user.email}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="rounded-md px-3 py-2.5 text-sm font-medium text-left text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors"
+                >
+                  {t("logout")}
+                </button>
+              </>
+            ) : (
+              <Link
+                href={`/${locale}/auth/login`}
+                onClick={() => setOpen(false)}
+                className="rounded-md px-3 py-2.5 text-sm font-medium text-[var(--primary)] hover:bg-[var(--muted-bg)] transition-colors"
+              >
+                {t("login")}
+              </Link>
+            )}
           </nav>
         </div>
       )}
