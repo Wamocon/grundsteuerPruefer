@@ -98,17 +98,18 @@ export default async function DashboardPage({ params }: Props) {
           ) : (
             <div className="space-y-3">
               {prueffaelle.map((pf) => (
+                // F-08: Entire row is clickable - links to re-run check
                 <div
                   key={pf.id}
-                  className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 flex items-center justify-between text-sm"
+                  className="group rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-4 py-3 flex items-center justify-between text-sm hover:border-[var(--primary)] hover:shadow-sm transition-all"
                 >
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <p className="font-medium text-[var(--foreground)]">
                       {pf.bundesland} - {pf.berechnungsmodell}
                     </p>
-                    <p className="text-xs text-[var(--muted)]">
-                      {new Date(pf.created_at).toLocaleDateString("de-DE")} |
-                      Bescheid: {pf.bescheid_betrag} € | Abweichung:{" "}
+                    <p className="text-xs text-[var(--muted)] mt-0.5">
+                      {new Date(pf.created_at).toLocaleDateString("de-DE")} |{" "}
+                      Bescheid: {pf.bescheid_betrag} \u20ac | Abweichung:{" "}
                       <span
                         className={
                           pf.abweichungs_stufe === "erheblich"
@@ -118,10 +119,18 @@ export default async function DashboardPage({ params }: Props) {
                             : "text-[var(--success)]"
                         }
                       >
-                        {pf.abweichung_euro} €
+                        {pf.abweichung_euro} \u20ac
                       </span>
                     </p>
                   </div>
+                  {/* F-08: Repeat check link */}
+                  <Link
+                    href={`/${locale}/pruefen`}
+                    className="ml-4 shrink-0 rounded-md border border-[var(--card-border)] px-3 py-1.5 text-xs font-medium text-[var(--muted)] group-hover:border-[var(--primary)] group-hover:text-[var(--primary)] transition-colors"
+                    aria-label={`Pr\u00fcffall f\u00fcr ${pf.bundesland} wiederholen`}
+                  >
+                    {t("repeatCheck")}
+                  </Link>
                 </div>
               ))}
             </div>

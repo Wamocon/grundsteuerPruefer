@@ -15,7 +15,7 @@ export default async function HomePage({ params }: Props) {
       <section className="bg-gradient-to-b from-[var(--muted-bg)] to-[var(--background)] px-4 py-20 text-center sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl">
           <span className="inline-block rounded-full bg-[var(--primary)] px-3 py-1 text-xs font-medium text-white mb-4">
-            Kostenlos in Version 1
+            {t("freeBadge")}
           </span>
           <h1 className="text-4xl font-extrabold tracking-tight text-[var(--foreground)] sm:text-5xl">
             {t("heroTitle")}
@@ -46,17 +46,17 @@ export default async function HomePage({ params }: Props) {
         <div className="mx-auto max-w-5xl">
           <div className="grid gap-8 sm:grid-cols-3">
             <BenefitCard
-              icon="🏛"
+              icon={<BuildingIcon />}
               title={t("benefit1Title")}
               text={t("benefit1Text")}
             />
             <BenefitCard
-              icon="🔍"
+              icon={<SearchIcon />}
               title={t("benefit2Title")}
               text={t("benefit2Text")}
             />
             <BenefitCard
-              icon="📄"
+              icon={<DocumentIcon />}
               title={t("benefit3Title")}
               text={t("benefit3Text")}
             />
@@ -78,11 +78,7 @@ export default async function HomePage({ params }: Props) {
       {/* Legal disclaimer */}
       <section className="px-4 py-8 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl rounded-lg border border-[var(--card-border)] bg-[var(--card)] p-4 text-xs text-[var(--muted)]">
-          <strong>Rechtlicher Hinweis:</strong> Grundwächter ist ein
-          informatorisches Prüftool und stellt keine Rechtsberatung dar. Generierte
-          Einspruchsentwürfe ersetzen nicht die Beratung durch einen Rechtsanwalt oder
-          Steuerberater. Die App arbeitet auf Basis Ihrer Eingaben – überprüfen Sie alle
-          Angaben anhand Ihres Originalbescheids.
+          <strong>{t("legalNoticeTitle")}</strong>{" "}{t("legalNoticeText")}
         </div>
       </section>
     </div>
@@ -94,15 +90,47 @@ function BenefitCard({
   title,
   text,
 }: {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   text: string;
 }) {
   return (
     <div className="rounded-xl border border-[var(--card-border)] bg-[var(--card)] p-6">
-      <div className="text-3xl mb-3">{icon}</div>
+      <div className="mb-3 h-8 w-8 text-[var(--primary)]">{icon}</div>
       <h3 className="text-base font-semibold text-[var(--foreground)] mb-2">{title}</h3>
       <p className="text-sm text-[var(--muted)] leading-6">{text}</p>
     </div>
+  );
+}
+
+function BuildingIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
+      <path d="M3 21h18" />
+      <path d="M3 7l9-4 9 4" />
+      <path d="M3 21V7" />
+      <path d="M21 21V7" />
+      <rect x="9" y="11" width="6" height="10" />
+    </svg>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
+      <circle cx="11" cy="11" r="8" />
+      <path d="M21 21l-4.35-4.35" />
+    </svg>
+  );
+}
+
+function DocumentIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="16" y1="13" x2="8" y2="13" />
+      <line x1="16" y1="17" x2="8" y2="17" />
+    </svg>
   );
 }

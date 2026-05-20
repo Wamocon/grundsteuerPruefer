@@ -9,10 +9,28 @@ interface RegisterFormProps {
   locale: string;
 }
 
+type AuthErrorKey =
+  | "errorInvalidCredentials"
+  | "errorEmailNotConfirmed"
+  | "errorTooManyRequests"
+  | "errorGeneric";
+
+function getAuthErrorKey(message: string): AuthErrorKey {
+  const msg = message.toLowerCase();
+  if (msg.includes("user already registered") || msg.includes("already exists")) {
+    return "errorInvalidCredentials";
+  }
+  if (msg.includes("too many requests") || msg.includes("rate limit")) {
+    return "errorTooManyRequests";
+  }
+  return "errorGeneric";
+}
+
 export function RegisterForm({ locale }: RegisterFormProps) {
   const t = useTranslations("auth");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -32,7 +50,7 @@ export function RegisterForm({ locale }: RegisterFormProps) {
     });
 
     if (authError) {
-      setError(authError.message);
+      setError(t(getAuthErrorKey(authError.message)));
       setLoading(false);
       return;
     }
@@ -69,21 +87,31 @@ export function RegisterForm({ locale }: RegisterFormProps) {
         <label htmlFor="password" className="block text-sm font-medium text-[var(--foreground)] mb-1">
           {t("passwordLabel")}
         </label>
-        <input
-          id="password"
-          type="password"
-          autoComplete="new-password"
-          required
-          minLength={8}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 text-sm focus:border-[var(--primary)] focus:outline-none"
-        />
-        <p className="mt-1 text-xs text-[var(--muted)]">Mindestens 8 Zeichen</p>
+        <div className="relative">
+          <input
+            id="password"
+            type={showPassword ? "text" : "password"}
+            autoComplete="new-password"
+            required
+            minLength={8}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full rounded-lg border border-[var(--card-border)] bg-[var(--background)] px-3 py-2 pr-10 text-sm focus:border-[var(--primary)] focus:outline-none"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? t("hidePassword") : t("showPassword")}
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+          >
+            {showPassword ? <EyeOffIcon /> : <EyeIcon />}
+          </button>
+        </div>
+        <p className="mt-1 text-xs text-[var(--muted)]">{t("passwordMinLength")}</p>
       </div>
 
       {error && (
-        <p className="text-sm text-[var(--danger)] rounded-lg border border-[var(--danger)] bg-red-50 dark:bg-red-950/20 px-3 py-2">
+        <p role="alert" className="text-sm text-[var(--danger)] rounded-lg border border-[var(--danger)] bg-red-50 dark:bg-red-950/20 px-3 py-2">
           {error}
         </p>
       )}
@@ -91,9 +119,11 @@ export function RegisterForm({ locale }: RegisterFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-lg bg-[var(--primary)] py-2.5 text-sm font-semibold text-white hover:bg-[var(--primary-hover)] disabled:opacity-50 transition-colors"
+        aria-busy={loading}
+        className="w-full rounded-lg bg-[var(--primary)] py-2.5 text-sm font-semibold text-white hover:bg-[var(--primary-hover)] disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
       >
-        {loading ? "..." : t("registerTitle")}
+        {loading && <SpinnerIcon />}
+        {t("registerTitle")}
       </button>
 
       <p className="text-center text-sm text-[var(--muted)]">
@@ -103,5 +133,31 @@ export function RegisterForm({ locale }: RegisterFormProps) {
         </Link>
       </p>
     </form>
+  );
+}
+
+function EyeIcon() {
+  return (
+    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function EyeOffIcon() {
+  return (
+    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24" />
+      <line x1="1" y1="1" x2="23" y2="23" />
+    </svg>
+  );
+}
+
+function SpinnerIcon() {
+  return (
+    <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+    </svg>
   );
 }

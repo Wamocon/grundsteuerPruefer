@@ -124,7 +124,7 @@ export function StepErgebnis({
         </div>
       )}
 
-      {/* P-07: Plain-language explanation */}
+      {/* Plain-language explanation */}
       <div className="rounded-lg border border-[var(--card-border)] bg-[var(--card)] px-4 py-4 text-sm text-[var(--foreground)] leading-relaxed">
         <p className="text-xs font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide">Erklärung in verständlicher Sprache</p>
         <p>{generiereAbweichungsErklaerung(wizardState, abweichung)}</p>
@@ -163,7 +163,7 @@ export function StepErgebnis({
         wir die Beratung durch einen Steuerberater.
       </p>
 
-      {/* Actions */}
+      {/* Primary CTA */}
       {hatAbweichung && (
         <button
           onClick={handleEinspruchClick}
@@ -173,11 +173,18 @@ export function StepErgebnis({
         </button>
       )}
 
+      {/* F-17: Clear visual hierarchy - primary secondary action vs destructive reset */}
       <div className="flex gap-3">
-        <button onClick={onBack} className="flex-1 rounded-lg border border-[var(--card-border)] py-2.5 text-sm font-medium hover:bg-[var(--muted-bg)] transition-colors">
+        <button
+          onClick={onBack}
+          className="flex-1 rounded-lg border border-[var(--card-border)] py-2.5 text-sm font-medium text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors"
+        >
           Eingaben ändern
         </button>
-        <button onClick={onNeuerPrueffall} className="flex-1 rounded-lg border border-[var(--card-border)] py-2.5 text-sm font-medium hover:bg-[var(--muted-bg)] transition-colors">
+        <button
+          onClick={onNeuerPrueffall}
+          className="flex-1 rounded-lg py-2.5 text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors"
+        >
           Neuer Prüffall
         </button>
       </div>

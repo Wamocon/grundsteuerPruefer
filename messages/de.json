@@ -24,7 +24,12 @@
     "register": "Registrieren",
     "logout": "Abmelden",
     "profile": "Profil",
-    "admin": "Administration"
+    "admin": "Administration",
+    "myChecks": "Meine Prüfungen",
+    "handbook": "Handbuch",
+    "skipToContent": "Zum Hauptinhalt springen",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
   },
   "footer": {
     "imprint": "Impressum",
@@ -43,7 +48,10 @@
     "benefit3Text": "Bei Abweichung generiert die App einen personalisierbaren Einspruchsentwurf – empfohlen: vor der Einreichung anwaltlich prüfen lassen.",
     "deadlineTitle": "Einspruchsfrist prüfen",
     "deadlineText": "Die Einspruchsfrist beträgt nur 1 Monat nach Bescheidbekanntgabe (§ 355 AO). Wann läuft Ihre Frist ab?",
-    "freeNotice": "Version 1 ist vollständig kostenlos – alle Funktionen, kein Konto erforderlich."
+    "freeNotice": "Version 1 ist vollständig kostenlos – alle Funktionen, kein Konto erforderlich.",
+    "freeBadge": "Kostenlos in Version 1",
+    "legalNoticeTitle": "Rechtlicher Hinweis:",
+    "legalNoticeText": "Grundwächter ist ein informatorisches Prüftool und stellt keine Rechtsberatung dar. Generierte Einspruchsentwürfe ersetzen nicht die Beratung durch einen Rechtsanwalt oder Steuerberater. Die App arbeitet auf Basis Ihrer Eingaben – überprüfen Sie alle Angaben anhand Ihres Originalbescheids."
   },
   "check": {
     "stepFederalState": "Bundesland wählen",
@@ -76,13 +84,28 @@
     "alreadyHaveAccount": "Bereits ein Konto?",
     "noAccount": "Noch kein Konto?",
     "confirmationSent": "Bestätigungs-E-Mail wurde gesendet. Bitte prüfen Sie Ihr Postfach.",
-    "resetPasswordTitle": "Passwort zurücksetzen"
+    "resetPasswordTitle": "Passwort zurücksetzen",
+    "errorInvalidCredentials": "E-Mail-Adresse oder Passwort ist falsch.",
+    "errorEmailNotConfirmed": "Bitte bestätigen Sie zuerst Ihre E-Mail-Adresse.",
+    "errorTooManyRequests": "Zu viele Anmeldeversuche. Bitte warten Sie kurz.",
+    "errorGeneric": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "passwordMinLength": "Mindestens 8 Zeichen"
   },
   "dashboard": {
     "title": "Dashboard",
     "openDeadlines": "Offene Fristen",
     "savedChecks": "Gespeicherte Prüffälle",
     "newCheck": "Neuen Prüffall starten",
-    "noChecksYet": "Noch keine gespeicherten Prüffälle."
-  }
+    "noChecksYet": "Noch keine gespeicherten Prüffälle.",
+    "repeatCheck": "Erneut prüfen"  },
+  "handbuch": {
+    "title": "Produkthandbuch",
+    "toc": "Inhaltsverzeichnis",
+    "searchPlaceholder": "Im Handbuch suchen ...",
+    "downloadPdf": "Als PDF herunterladen",
+    "generating": "PDF wird erstellt ...",
+    "noResults": "Keine Ergebnisse gefunden.",
+    "tocToggle": "Inhaltsverzeichnis"  }
 }

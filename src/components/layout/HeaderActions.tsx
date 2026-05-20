@@ -3,23 +3,35 @@
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase/client";
+import { useRouter } from "next/navigation";
 
 interface HeaderActionsProps {
   locale: string;
+  user: User | null;
 }
 
-export function HeaderActions({ locale }: HeaderActionsProps) {
+export function HeaderActions({ locale, user }: HeaderActionsProps) {
   const { theme, toggle } = useTheme();
   const t = useTranslations("nav");
+  const router = useRouter();
   const otherLocale = locale === "de" ? "en" : "de";
 
+  async function handleLogout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push(`/${locale}`);
+    router.refresh();
+  }
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       {/* Language switcher */}
       <Link
         href={`/${otherLocale}`}
         className="rounded-md px-2 py-1 text-xs font-medium border border-[var(--card-border)] text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--foreground)] transition-colors uppercase"
-        aria-label="Switch language"
+        aria-label={`Switch to ${otherLocale === "de" ? "Deutsch" : "English"}`}
       >
         {otherLocale}
       </Link>
@@ -37,13 +49,31 @@ export function HeaderActions({ locale }: HeaderActionsProps) {
         )}
       </button>
 
-      {/* Auth link */}
-      <Link
-        href={`/${locale}/auth/login`}
-        className="rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:bg-[var(--primary-hover)] transition-colors"
-      >
-        {t("login")}
-      </Link>
+      {/* Auth */}
+      {user ? (
+        <div className="hidden md:flex items-center gap-1">
+          <Link
+            href={`/${locale}/dashboard`}
+            className="rounded-md px-2.5 py-1.5 text-xs font-medium text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--muted-bg)] transition-colors max-w-[120px] truncate"
+            title={user.email}
+          >
+            {user.email?.split("@")[0] ?? t("profile")}
+          </Link>
+          <button
+            onClick={handleLogout}
+            className="rounded-md border border-[var(--card-border)] px-2.5 py-1.5 text-xs font-medium text-[var(--muted)] hover:text-[var(--foreground)] hover:border-[var(--foreground)] transition-colors"
+          >
+            {t("logout")}
+          </button>
+        </div>
+      ) : (
+        <Link
+          href={`/${locale}/auth/login`}
+          className="hidden md:inline-flex rounded-md bg-[var(--primary)] px-3 py-1.5 text-xs font-medium text-[var(--primary-foreground)] hover:bg-[var(--primary-hover)] transition-colors"
+        >
+          {t("login")}
+        </Link>
+      )}
     </div>
   );
 }
