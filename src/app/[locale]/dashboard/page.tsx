@@ -24,11 +24,17 @@ export default async function DashboardPage({ params }: Props) {
     redirect(`/${locale}/auth/login`);
   }
 
-  const { data: prueffaelleRaw } = await supabase
+  const { data: prueffaelleRaw, error: queryError } = await supabase
     .from("prueffaelle")
     .select("*, fristen(*)")
+    .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(20);
+
+  if (queryError) {
+    console.error("Dashboard query error:", queryError.message);
+  }
+
   const prueffaelle = prueffaelleRaw as PrueffallWithFristen[] | null;
 
   const offeneFristen = prueffaelle?.flatMap((p) =>
