@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/Breadcrumb";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -76,6 +77,32 @@ export default async function HilfePage({ params }: Props) {
         <p className="mt-2 text-sm text-[var(--muted)]">
           Alles Wissenswerte zur Grundsteuerreform, den Berechnungsmodellen und dem Einspruchsverfahren.
         </p>
+
+        {/* Handbook CTA */}
+        <Link
+          href={`/${locale}/hilfe/handbuch`}
+          className="mt-6 flex items-center gap-4 rounded-xl border border-[var(--primary)]/30 bg-[var(--primary)]/5 p-5 transition-colors hover:border-[var(--primary)] hover:bg-[var(--primary)]/10"
+        >
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--primary)]/10 text-[var(--primary)]">
+            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+          </span>
+          <div className="flex-1">
+            <p className="font-semibold text-[var(--foreground)]">
+              {locale === "en" ? "Product Handbook" : "Produkthandbuch"}
+            </p>
+            <p className="text-sm text-[var(--muted)]">
+              {locale === "en"
+                ? "Complete guide with search and PDF download"
+                : "Vollständige Anleitung mit Suche und PDF-Download"}
+            </p>
+          </div>
+          <svg className="h-5 w-5 shrink-0 text-[var(--muted)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </Link>
 
         {/* Models section */}
         <section className="mt-10">
